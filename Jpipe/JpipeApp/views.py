@@ -1627,18 +1627,18 @@ def add_adapter(request):
             HttpResponse(output)
         try:
             kwargs = {}
-            # if((data.get('UserId') is None) or ((data.get('UserId') is not  None) and (len(data['UserId']) <= 0))):
-            #     output_str += ",UserId is mandatory"
-            #     output = '{"error_code":"411","error_desc":"Response=%s"}' %output_str
-            #     logging.debug("add_adapter:"+ output)
-            #     return HttpResponse(output)
-            # else:
-            #     userid    = data['UserId']
-            #     get_user = JP_Company_Users.objects.get(CUId=userid,StatusActive=True)
-            #     print(get_user)
-            #     if len(str(get_user)) > 0:
-            #         print('inside if')
-            #         kwargs['CUId'] = get_user
+            if((data.get('UserId') is None) or ((data.get('UserId') is not  None) and (len(data['UserId']) <= 0))):
+                output_str += ",UserId is mandatory"
+                output = '{"error_code":"411","error_desc":"Response=%s"}' %output_str
+                logging.debug("add_adapter:"+ output)
+                return HttpResponse(output)
+            else:
+                userid    = data['UserId']
+                get_user = JP_Company_Users.objects.get(CUId=userid,StatusActive=True)
+                print(get_user)
+                if len(str(get_user)) > 0:
+                    print('inside if')
+                    kwargs['CUId'] = get_user
 
 
             if((data.get('AdapterName') is None) or ((data.get('AdapterName') is not  None) and (len(data['AdapterName']) <= 0))):
